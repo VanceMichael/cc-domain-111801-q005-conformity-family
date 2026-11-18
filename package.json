@@ -1,0 +1,16 @@
+{
+  "name": "conformity-family",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "产品家族认证网站的代表型号与排除项补采",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test --test-concurrency=1",
+    "demo": "node scripts/demo.mjs",
+    "start": "node scripts/start.mjs"
+  }
+}

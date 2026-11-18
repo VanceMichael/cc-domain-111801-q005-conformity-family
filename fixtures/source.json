@@ -1,0 +1,53 @@
+{
+  "scope": "MODEL-A",
+  "resources": {
+    "/conformity/models": {
+      "body": {
+        "laboratory": "LAB1",
+        "certificates": [
+          {
+            "id": "CF100",
+            "href": "/conformity/models/records/CF100"
+          }
+        ]
+      }
+    },
+    "/conformity/models/records/CF100": {
+      "body": {
+        "certificate": "CF100",
+        "laboratory": "LAB1",
+        "model": "MODEL-A",
+        "standard": "STD1",
+        "result": "conform",
+        "issue": "1"
+      }
+    },
+    "/conformity/models/relations/CF100": {
+      "body": {
+        "family": "FAMILY",
+        "representative": "MODEL-A",
+        "configuration": {
+          "power": "PSU-A",
+          "module": "M1"
+        },
+        "supplements": [
+          "/reports/S2"
+        ]
+      }
+    }
+  },
+  "portal": {
+    "identity": "certificate",
+    "records": {
+      "CF100": {
+        "certificate": "CF100",
+        "laboratory": "LAB1",
+        "model": "MODEL-A",
+        "standard": "STD1",
+        "result": "conform",
+        "issue": "1"
+      }
+    },
+    "version": 1
+  }
+}
