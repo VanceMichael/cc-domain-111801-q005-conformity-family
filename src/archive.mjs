@@ -13,7 +13,10 @@ export class Archive {
       digest TEXT PRIMARY KEY, location TEXT NOT NULL, observed_at TEXT NOT NULL, size INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS receipts (
       scope TEXT NOT NULL, business_key TEXT NOT NULL, digest TEXT NOT NULL, record TEXT NOT NULL,
-      decision TEXT NOT NULL, PRIMARY KEY(scope,business_key,digest));`);
+      decision TEXT NOT NULL, PRIMARY KEY(scope,business_key,digest));
+      CREATE TABLE IF NOT EXISTS packages (
+      family TEXT NOT NULL, snapshot_id TEXT NOT NULL, produced_at TEXT NOT NULL,
+      package TEXT NOT NULL, PRIMARY KEY(family,snapshot_id));`)
     return this;
   }
   async preserve(document) {
@@ -33,6 +36,18 @@ export class Archive {
   }
   records(scope) {
     return this.database.prepare('SELECT * FROM receipts WHERE scope=? ORDER BY business_key,digest').all(scope).map(row => ({ ...row, record: JSON.parse(row.record), decision: JSON.parse(row.decision) }));
+  }
+  savePackage(family, snapshotId, pkg) {
+    this.database.prepare('INSERT OR IGNORE INTO packages VALUES(?,?,?,?)')
+      .run(family, snapshotId, new Date().toISOString(), JSON.stringify(pkg));
+  }
+  packages(family) {
+    return this.database.prepare('SELECT * FROM packages WHERE family=? ORDER BY snapshot_id').all(family)
+      .map(row => ({ snapshotId: row.snapshot_id, producedAt: row.produced_at, package: JSON.parse(row.package) }));
+  }
+  latestPackage(family) {
+    const row = this.database.prepare('SELECT * FROM packages WHERE family=? ORDER BY snapshot_id DESC LIMIT 1').get(family);
+    return row ? { snapshotId: row.snapshot_id, producedAt: row.produced_at, package: JSON.parse(row.package) } : null;
   }
   async original(digest) {
     if (!/^[a-f0-9]{64}$/.test(digest)) throw new Error('原文摘要无效');

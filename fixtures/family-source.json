@@ -1,0 +1,109 @@
+{
+  "scope": "family:FAMILY",
+  "family": "FAMILY",
+  "configurations": [
+    { "name": "C1", "standards": ["STD1"], "attributes": { "power": "PSU-A", "module": "M1", "region": "EU" } },
+    { "name": "C2", "standards": ["STD1", "STD2"], "attributes": { "power": "PSU-B", "module": "M2", "region": "EU" } },
+    { "name": "C3", "standards": ["STD1"], "attributes": { "power": "PSU-A", "module": "M2", "region": "EU" } },
+    { "name": "C4", "standards": ["STD3"], "attributes": { "power": "PSU-B", "module": "M4", "region": "EU" } },
+    { "name": "C5", "standards": ["STD1"], "attributes": { "power": "PSU-A", "module": "M3", "region": "EU" } },
+    { "name": "C6", "standards": ["STD1"], "attributes": { "power": "PSU-A", "module": "M1", "region": "US" } }  ],
+  "resources": {
+    "/conformity/models": {
+      "body": {
+        "laboratory": "LAB1",
+        "certificates": [
+          { "id": "CF100", "laboratory": "LAB1", "href": "/conformity/models/records/CF100", "relations": ["/conformity/models/relations/CF100"] },
+          { "id": "CF300", "laboratory": "LAB2", "href": "/conformity/models/records/CF300", "relations": ["/conformity/models/relations/CF300"] },
+          { "id": "CF400", "laboratory": "LAB1", "href": "/conformity/models/records/CF400", "relations": ["/conformity/models/relations/CF400"] },
+          { "id": "CF500", "laboratory": "LAB2", "href": "/conformity/models/records/CF500", "relations": ["/conformity/models/relations/CF500"] },
+          { "id": "CF600", "laboratory": "LAB2", "href": "/conformity/models/records/CF600", "relations": ["/conformity/models/relations/CF600"] }
+        ]
+      }
+    },
+    "/conformity/models/records/CF100": {
+      "body": { "certificate": "CF100", "laboratory": "LAB1", "model": "MODEL-A", "standard": "STD1", "result": "conform", "issue": "1" }
+    },
+    "/conformity/models/relations/CF100": {
+      "body": {
+        "family": "FAMILY",
+        "certificate": "CF100",
+        "representative": "MODEL-A",
+        "configuration": { "power": "PSU-A", "module": "M1", "region": "EU" },
+        "supplements": ["/conformity/models/supplements/CF100-S2"],
+        "differences": ["/conformity/models/differences/CF100-D3"]
+      }
+    },
+    "/conformity/models/supplements/CF100-S2": {
+      "body": {
+        "certificate": "CF100",
+        "issue": "1",
+        "title": "CF100 补充页 S2：收窄区域并排除 M3",
+        "issuedAt": "2026-02-01",
+        "narrows": { "region": "EU" },
+        "excludes": [{ "module": "M3" }]
+      }
+    },
+    "/conformity/models/differences/CF100-D3": {
+      "body": {
+        "certificate": "CF100",
+        "issue": "1",
+        "title": "CF100 差异说明 D3：适用模组 M1 调整为 M2",
+        "issuedAt": "2026-03-01",
+        "change": { "module": { "from": "M1", "to": "M2" } }
+      }
+    },
+    "/conformity/models/records/CF300": {
+      "body": { "certificate": "CF300", "laboratory": "LAB2", "model": "MODEL-B", "standard": "STD2", "result": "conform", "issue": "2" }
+    },
+    "/conformity/models/relations/CF300": {
+      "body": {
+        "family": "FAMILY",
+        "certificate": "CF300",
+        "representative": "MODEL-B",
+        "configuration": { "power": "PSU-B", "module": "M2", "region": "EU" },
+        "supplements": [],
+        "differences": []
+      }
+    },
+    "/conformity/models/records/CF400": {
+      "body": { "certificate": "CF400", "laboratory": "LAB1", "model": "MODEL-C", "standard": "STD3", "result": "conform", "issue": "1" }
+    },
+    "/conformity/models/relations/CF400": {
+      "body": {
+        "family": "FAMILY",
+        "certificate": "CF400",
+        "representative": "MODEL-C",
+        "configuration": { "power": "PSU-B", "module": "M1" },
+        "supplements": [],
+        "differences": []
+      }
+    },
+    "/conformity/models/records/CF500": {
+      "body": { "certificate": "CF500", "laboratory": "LAB2", "model": "MODEL-D", "standard": "STD3", "result": "conform", "issue": "1" }
+    },
+    "/conformity/models/relations/CF500": {
+      "body": {
+        "family": "FAMILY",
+        "certificate": "CF500",
+        "representative": "MODEL-D",
+        "configuration": { "module": "M4" },
+        "supplements": [],
+        "differences": []
+      }
+    },
+    "/conformity/models/records/CF600": {
+      "body": { "certificate": "CF600", "laboratory": "LAB2", "model": "MODEL-E", "standard": "STD2", "result": "conform", "issue": "1" }
+    },
+    "/conformity/models/relations/CF600": {
+      "body": {
+        "family": "FAMILY",
+        "certificate": "CF600",
+        "representative": "MODEL-E",
+        "configuration": { "power": "PSU-A", "module": "M2", "region": "EU" },
+        "supplements": [],
+        "differences": []
+      }
+    }
+  }
+}

@@ -7,7 +7,10 @@
         "certificates": [
           {
             "id": "CF100",
-            "href": "/conformity/models/records/CF100"
+            "href": "/conformity/models/records/CF100",
+            "relations": [
+              "/conformity/models/relations/CF100"
+            ]
           }
         ]
       }
@@ -25,6 +28,7 @@
     "/conformity/models/relations/CF100": {
       "body": {
         "family": "FAMILY",
+        "certificate": "CF100",
         "representative": "MODEL-A",
         "configuration": {
           "power": "PSU-A",
